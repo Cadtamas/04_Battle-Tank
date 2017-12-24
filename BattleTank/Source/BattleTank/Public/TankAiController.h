@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "Tank.h"
 #include "AIController.h"
 #include "TankAiController.generated.h"
@@ -15,9 +16,10 @@ class BATTLETANK_API ATankAiController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
+private:
 
 	virtual void BeginPlay() override;
 	ATank* GetControlledTank() const;
+	ATank* GetPlayerTank() const;
 	
 };
