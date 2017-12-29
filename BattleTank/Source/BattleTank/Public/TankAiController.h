@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
-#include "Tank.h"
 #include "AIController.h"
 #include "TankAiController.generated.h"
+
+class ATank;
 
 /**
  * 
