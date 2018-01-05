@@ -21,7 +21,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;//.Z turns the FVector to a float 
 	IntendTurnRight(RightThrow);
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) //Throw between -1 (backward) and 1 (forward)
@@ -29,7 +28,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw) //Throw between -1 (
 	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(Throw); //TankTrack method
 	RightTrack->SetThrottle(Throw);
-	//TODO prevent double speed due to dual control
 }
 
 
@@ -38,7 +36,6 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(-Throw); //TankTrack method
 	RightTrack->SetThrottle(Throw);
-	//TODO prevent double speed due to dual control
 }
 
 void UTankMovementComponent::IntendTurnLeft(float Throw)
@@ -46,7 +43,6 @@ void UTankMovementComponent::IntendTurnLeft(float Throw)
 	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(Throw); //TankTrack method
 	RightTrack->SetThrottle(-Throw);
-	//TODO prevent double speed due to dual control
 }
 
 void UTankMovementComponent::IntendMoveBackward(float Throw)
@@ -54,5 +50,4 @@ void UTankMovementComponent::IntendMoveBackward(float Throw)
 	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(-Throw); //TankTrack method
 	RightTrack->SetThrottle(-Throw);
-	//TODO prevent double speed due to dual control
 }
