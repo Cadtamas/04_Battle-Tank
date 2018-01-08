@@ -25,7 +25,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 void UTankMovementComponent::IntendMoveForward(float Throw) //Throw between -1 (backward) and 1 (forward)
 {
-	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
+	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(Throw); //TankTrack method
 	RightTrack->SetThrottle(Throw);
 }
@@ -33,21 +33,21 @@ void UTankMovementComponent::IntendMoveForward(float Throw) //Throw between -1 (
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {
-	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
+	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(-Throw); //TankTrack method
 	RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendTurnLeft(float Throw)
 {
-	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
+	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(Throw); //TankTrack method
 	RightTrack->SetThrottle(-Throw);
 }
 
 void UTankMovementComponent::IntendMoveBackward(float Throw)
 {
-	if (!LeftTrack || !RightTrack) { return; } //Protect the pointer
+	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
 	LeftTrack->SetThrottle(-Throw); //TankTrack method
 	RightTrack->SetThrottle(-Throw);
 }
