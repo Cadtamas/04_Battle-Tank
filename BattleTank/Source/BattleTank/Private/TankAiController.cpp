@@ -27,7 +27,7 @@ void ATankAiController::Tick(float DeltaTime)
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 		
 	//Fire if ready
-	//AimingComponent->Fire(); //TODO limit firing rate
+	AimingComponent->Fire(); //TODO limit firing rate
 
 	//UE_LOG(LogTemp, Warning, TEXT("Player controller ticking"));
 }
