@@ -50,6 +50,8 @@ private:
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
+	bool IsBarrelMoving();
+
 	//Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
@@ -68,4 +70,5 @@ private:
 
 	double LastFireTime = 0;
 	
+	FVector AimDirection;
 };
