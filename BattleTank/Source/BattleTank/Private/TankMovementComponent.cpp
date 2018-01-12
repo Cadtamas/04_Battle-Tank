@@ -34,15 +34,15 @@ void UTankMovementComponent::IntendMoveForward(float Throw) //Throw between -1 (
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
-	LeftTrack->SetThrottle(-Throw); //TankTrack method
-	RightTrack->SetThrottle(Throw);
+	LeftTrack->SetThrottle(Throw); //TankTrack method
+	RightTrack->SetThrottle(-Throw);
 }
 
 void UTankMovementComponent::IntendTurnLeft(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; } //Protect the pointer
-	LeftTrack->SetThrottle(Throw); //TankTrack method
-	RightTrack->SetThrottle(-Throw);
+	LeftTrack->SetThrottle(-Throw); //TankTrack method
+	RightTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendMoveBackward(float Throw)
