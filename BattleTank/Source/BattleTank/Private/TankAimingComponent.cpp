@@ -20,12 +20,10 @@ void UTankAimingComponent::BeginPlay()
 	//We need this method, because the initial reload
 	LastFireTime = FPlatformTime::Seconds(); //We need this to set the actual date for the reload countdown
 }
-	
 
-void UTankAimingComponent::Initialise(UTankBarrel*BarrelToSet, UTankTurret* TurretToSet)
+EFiringState UTankAimingComponent::GetFiringState() const
 {
-	Barrel = BarrelToSet;
-	Turret = TurretToSet;
+	return FiringState;
 }
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
@@ -43,6 +41,12 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 		FiringState = EFiringState::Locked;
 	}
 	//TODO Handle aiming and locked state
+}
+
+void UTankAimingComponent::Initialise(UTankBarrel*BarrelToSet, UTankTurret* TurretToSet)
+{
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
 }
 
 bool UTankAimingComponent::IsBarrelMoving()

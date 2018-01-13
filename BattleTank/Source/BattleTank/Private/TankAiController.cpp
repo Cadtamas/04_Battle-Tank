@@ -26,8 +26,11 @@ void ATankAiController::Tick(float DeltaTime)
 	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 		
-	//Fire if ready
-	AimingComponent->Fire(); //TODO limit firing rate
+	//If aim or locked
+	if (AimingComponent->GetFiringState() == EFiringState::Locked) 
+	{
+		AimingComponent->Fire();
+	}
 
 	//UE_LOG(LogTemp, Warning, TEXT("Player controller ticking"));
 }

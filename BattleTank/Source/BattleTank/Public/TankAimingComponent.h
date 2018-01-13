@@ -37,6 +37,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise( UTankBarrel*BarrelToSet, UTankTurret* TurretToSet ); //Public, because we need it in the blueprint
 
+	EFiringState GetFiringState() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category="State")
 	EFiringState FiringState = EFiringState::Reloading;
