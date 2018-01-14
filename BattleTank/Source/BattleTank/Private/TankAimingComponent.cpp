@@ -21,14 +21,13 @@ void UTankAimingComponent::BeginPlay()
 	LastFireTime = FPlatformTime::Seconds(); //We need this to set the actual date for the reload countdown
 }
 
-EFiringState UTankAimingComponent::GetFiringState() const
-{
-	return FiringState;
-}
-
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+	if (RoundsLeft <=0)
+	{
+		FiringState = EFiringState::OutOfAmmo;
+	}
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringState = EFiringState::Reloading; //It will reload until the next shot
 	}
@@ -41,6 +40,16 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 		FiringState = EFiringState::Locked;
 	}
 	//TODO Handle aiming and locked state
+}
+
+int UTankAimingComponent::GetRoundsLeft() const
+{
+	return RoundsLeft;
+}
+
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel*BarrelToSet, UTankTurret* TurretToSet)
@@ -85,7 +94,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 void UTankAimingComponent::Fire()
 {
 	
-	if (FiringState!=EFiringState::Reloading) //TODO EFiringState is an enum whic is set by tick component
+	if (FiringState==EFiringState::Locked|| FiringState == EFiringState::Aiming) //TODO EFiringState is an enum whic is set by tick component
 	{  //Protect the pointer
 
 	   //Spawn a projectile at the socket location on the barrel
@@ -99,6 +108,7 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds(); //We need this to set the actual date for the reload countdown
+		RoundsLeft--;
 	}
 }
 

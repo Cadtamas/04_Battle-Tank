@@ -14,7 +14,8 @@ enum class EFiringState:uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 //Forward declaration
@@ -31,13 +32,16 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 public:	
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="firing")
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise( UTankBarrel*BarrelToSet, UTankTurret* TurretToSet ); //Public, because we need it in the blueprint
 
 	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "firing")
+	int GetRoundsLeft() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category="State")
@@ -73,4 +77,6 @@ private:
 	double LastFireTime = 0;
 	
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
 };
