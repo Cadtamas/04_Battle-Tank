@@ -1,6 +1,7 @@
  // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Projectile.h"
+#include"Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 
 
 // Sets default values
@@ -8,6 +9,14 @@ AProjectile::AProjectile()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true); //In the Projectile_BP->Details->Collision->Simulation Generates Hit... checkbox will be checked in default.
+	CollisionMesh->SetVisibility(false); //Details->Rendering->Visible checkbox
+
+	LaunchBlast= CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	LaunchBlast->AttachTo(RootComponent);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
 	ProjectileMovement->bAutoActivate = false; //It doesn't stop flying off until we actuall fire it.
